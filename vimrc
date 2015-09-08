@@ -56,8 +56,11 @@ endif
 set nobackup
 set nowritebackup
 set noswapfile
+
 set bg=dark
 set t_Co=256
+set cursorline
+set cursorcolumn 
 color wombat256mod
 
 let mapleader=","
@@ -109,6 +112,7 @@ set pastetoggle=<F2>
 set nowrap
 autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2
 
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -129,12 +133,13 @@ Plugin 'The-NERD-Commenter'
 Plugin 'surround.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'editorconfig/editorconfig'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'JSON.vim'
 Plugin 'yaml.vim'
 Plugin 'Markdown'
 Plugin 'html5.vim'
+Plugin 'Yggdroot/indentLine'
 Plugin 'Markdown-syntax'
     " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -142,6 +147,9 @@ filetype plugin indent on    " required
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
+nmap <silent><leader>t :NERDTreeToggle<CR>
+nmap <silent><leader>bn :bn<CR>
+nmap <silent><leader>bp :bp<CR>
 
 
 " jedi and YCM config
@@ -177,3 +185,14 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['jshint']
+
+" indentLine
+let g:indentLine_char=">"
+let g:indentLine_fileType = ['c', 'cpp', 'javascript', 'python', 'html']
+let g:indentLine_color_term = 120
+
+"html css
+let g:user_emmet_leader_key='<C-l>'
+let g:user_emmet_mode='a'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
