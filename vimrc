@@ -110,7 +110,7 @@ set sts=4
 set ts=4
 set pastetoggle=<F2>
 set nowrap
-autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript,html,json,yaml setlocal shiftwidth=2 tabstop=2
 
 
 filetype off
@@ -128,7 +128,6 @@ Plugin 'scrooloose/nerdtree'      "文件浏览
 Plugin 'Lokaltog/vim-powerline'   "状态栏美化
 Plugin 'mattn/emmet-vim'
 Plugin 'ctrlp.vim' 
-Plugin 'jsbeautify'
 Plugin 'The-NERD-Commenter'
 Plugin 'surround.vim'
 Plugin 'marijnh/tern_for_vim'
@@ -141,7 +140,10 @@ Plugin 'Markdown'
 Plugin 'html5.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'Markdown-syntax'
-    " All of your Plugins must be added before the following line
+Plugin 'jsbeautify'
+Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -187,12 +189,23 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['jshint']
 
 " indentLine
-let g:indentLine_char=">"
+let g:indentLine_char="‣"
 let g:indentLine_fileType = ['c', 'cpp', 'javascript', 'python', 'html']
-let g:indentLine_color_term = 120
+let g:indentLine_color_term = 233
 
 "html css
 let g:user_emmet_leader_key='<C-l>'
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+" vim-javascritp setting
+let g:javascript_conceal_function   = "ƒ"
+let g:javascript_conceal_null       = "ø"
+let g:javascript_conceal_this       = "@"
+let g:javascript_conceal_return     = "⇚"
+let g:javascript_conceal_undefined  = "¿"
+let g:javascript_conceal_NaN        = "ℕ"
+let g:javascript_conceal_prototype  = "¶"
+let g:javascript_conceal_static     = "•"
+let g:javascript_conceal_super      = "Ω"
