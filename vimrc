@@ -122,10 +122,12 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Auto-Pairs'
 Plugin 'AutoComplPop'
+Plugin 'fholgado/minibufexpl.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi'
 Plugin 'scrooloose/nerdtree'      "文件浏览
 Plugin 'Lokaltog/vim-powerline'   "状态栏美化
+Plugin 'html5.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'ctrlp.vim' 
 Plugin 'The-NERD-Commenter'
@@ -134,10 +136,15 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/syntastic'
+
 Plugin 'JSON.vim'
 Plugin 'yaml.vim'
 Plugin 'Markdown'
-Plugin 'html5.vim'
+Plugin 'HtmlHelper'
+Plugin 'css3'
+Plugin 'css3-syntax-plus'
+Plugin 'jade.vim'
+
 Plugin 'Yggdroot/indentLine'
 Plugin 'Markdown-syntax'
 Plugin 'jsbeautify'
@@ -155,7 +162,7 @@ nmap <silent><leader>bp :bp<CR>
 
 
 " jedi and YCM config
-autocmd FileType python setlocal completeopt=longest
+autocmd FileType python,javascript setlocal completeopt=longest
 set pumheight=10
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_on_dot = 1
@@ -164,6 +171,9 @@ let g:jedi#documentation_command = "K"
 let g:jedi#rename_command = "<leader>r"
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <Tab> <C-x><C-o>
+let g:ycm_confirm_extra_conf=0
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt=0
 let g:ycm_seed_identifiers_with_syntax=1    
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
@@ -191,21 +201,35 @@ let g:syntastic_javascript_checkers = ['jshint']
 " indentLine
 let g:indentLine_char="‣"
 let g:indentLine_fileType = ['c', 'cpp', 'javascript', 'python', 'html']
-let g:indentLine_color_term = 233
+let g:indentLine_color_term = 240
 
 "html css
-let g:user_emmet_leader_key='<C-l>'
-let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_leader_key='<C-l>'
+let g:user_emmet_mode='a'
+let g:emmet_indent_size = 2
+let g:emmet_html5=1
+let g:tern#is_show_argument_hints_enabled=1
 
 " vim-javascritp setting
-let g:javascript_conceal_function   = "ƒ"
-let g:javascript_conceal_null       = "ø"
-let g:javascript_conceal_this       = "@"
-let g:javascript_conceal_return     = "⇚"
-let g:javascript_conceal_undefined  = "¿"
-let g:javascript_conceal_NaN        = "ℕ"
-let g:javascript_conceal_prototype  = "¶"
-let g:javascript_conceal_static     = "•"
-let g:javascript_conceal_super      = "Ω"
+" let g:javascript_conceal_function   = "ƒ"
+" let g:javascript_conceal_null       = "ø"
+" let g:javascript_conceal_return     = "ℛ"
+" let g:javascript_conceal_this       = "⅀"
+" let g:javascript_conceal_undefined  = "¿"
+" let g:javascript_conceal_NaN        = "ℕ"
+" let g:javascript_conceal_prototype  = "¶"
+" let g:javascript_conceal_static     = "•"
+" let g:javascript_conceal_super      = "Ω"
+
+
+" minibufexpl
+" MiniBufExpl Colors
+hi MBENormal               guifg=#808080 guibg=fg
+hi MBEChanged              guifg=#CD5907 guibg=fg
+hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
+hi MBEVisibleChanged       guifg=#F1266F guibg=fg
+hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
+hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
