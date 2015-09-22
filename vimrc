@@ -110,7 +110,10 @@ set sts=4
 set ts=4
 set pastetoggle=<F2>
 set nowrap
-autocmd FileType javascript,html,json,yaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2
+
+" set list
+" set listchars=tab:>.,trail:.,extends:\#,nbsp:.
 
 
 filetype off
@@ -138,6 +141,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/syntastic'
 
 Plugin 'JSON.vim'
+Plugin 'XadillaX/json-formatter.vim'
 Plugin 'yaml.vim'
 Plugin 'Markdown'
 Plugin 'HtmlHelper'
@@ -192,15 +196,15 @@ let g:Powerline_symbols='unicode'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers = ['pylint']
 
 " indentLine
 let g:indentLine_char="‣"
-let g:indentLine_fileType = ['c', 'cpp', 'javascript', 'python', 'html']
+let g:indentLine_fileType = ['c', 'cpp', 'javascript', 'python', 'html', 'json']
 let g:indentLine_color_term = 240
 
 "html css
