@@ -10,7 +10,6 @@
 runtime! debian.vim
 autocmd! BufWritePost ~/.vimrc source %
 
-
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
@@ -22,47 +21,20 @@ if has("syntax")
   syntax on
 endif
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-"if has("autocmd")
-"  filetype plugin indent on
-"endif
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-" set showcmd		" Show (partial) command in status line.
-" set showmatch		" Show matching brackets.
-" set ignorecase		" Do case insensitive matching
-" set smartcase		" Do smart case matching
-" set incsearch		" Incremental search
-" set autowrite		" Automatically save before commands like :next and :make
-" set hidden		" Hide buffers when they are abandoned
-" set mouse=a		" Enable mouse usage (all modes)
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
 set nobackup
 set nowritebackup
 set noswapfile
-
+set magic
 set bg=dark
 set t_Co=256
 set cursorline
 set cursorcolumn 
+set background=dark
 color wombat256mod
+set lazyredraw
 
+" The following are commented out as they cause vim to behave a lot
+" differently from regular Vi. They are highly recommended though.
 let mapleader=","
 set nocompatible    " be iMproved, required
 set number          " show line number
@@ -71,13 +43,11 @@ set showmatch       " Show matching brackets.
 set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching
 set incsearch       " Incremental search
+set hlsearch
 set autowrite       " Automatically save before commands like :next         and :make
 set hidden          " Hide buffers when they are abandoned
-set mouse+=a         " Enable mouse usage (all modes)
+set mouse=a         " Enable mouse usage (all modes)
 set bs=2            " make backspace behave like normal again
-
-" for search 
-set hlsearch
 
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
@@ -99,7 +69,7 @@ set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=80
-highlight ColorColumn ctermbg=100
+highlight ColorColumn ctermbg=200
 
 " Real programmers don't use TABs but spaces
 set cindent
@@ -112,10 +82,6 @@ set pastetoggle=<F2>
 set nowrap
 autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2
 
-" set list
-" set listchars=tab:>.,trail:.,extends:\#,nbsp:.
-
-
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -124,45 +90,37 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Auto-Pairs'
-Plugin 'AutoComplPop'
-Plugin 'fholgado/minibufexpl.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi'
 Plugin 'scrooloose/nerdtree'      "文件浏览
-Plugin 'Lokaltog/vim-powerline'   "状态栏美化
-Plugin 'html5.vim'
+Plugin 'bling/vim-airline'
 Plugin 'mattn/emmet-vim'
-Plugin 'ctrlp.vim' 
 Plugin 'The-NERD-Commenter'
 Plugin 'surround.vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'scrooloose/syntastic'
-
-Plugin 'JSON.vim'
-Plugin 'XadillaX/json-formatter.vim'
-Plugin 'yaml.vim'
-Plugin 'Markdown'
-Plugin 'HtmlHelper'
-Plugin 'css3'
-Plugin 'css3-syntax-plus'
-Plugin 'jade.vim'
-
-Plugin 'Yggdroot/indentLine'
-Plugin 'Markdown-syntax'
-Plugin 'jsbeautify'
 Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
+"tools 
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'marijnh/tern_for_vim'
+"filetype
+Plugin 'elzr/vim-json'
+Plugin 'jade.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
+nmap <F3> :NERDTreeToggle<CR>
 nmap <silent><leader>t :NERDTreeToggle<CR>
 nmap <silent><leader>bn :bn<CR>
 nmap <silent><leader>bp :bp<CR>
+
+" commenter
+let g:NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
+let g:NERDCompactSexyComs=1   " 多行注释时样子更好看
 
 
 " jedi and YCM config
@@ -189,23 +147,48 @@ let g:ycm_collect_identifiers_from_tags_files=1
 
 " powerline
 set laststatus=2
-set fillchars+=stl:\ ,stlnc:\
-let g:Powerline_symbols='unicode'
+" set fillchars+=stl:\ ,stlnc:\
+" let g:Powerline_symbols='unicode'
+
+""""""""""""""""""""""""""""""
+" airline
+""""""""""""""""""""""""""""""
+let g:airline_enable = 1
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_detect_paste=1
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'c'  : 'C',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V',
+  \ '' : 'V',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ }
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 1
+if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+endif
+let g:airline_theme             = 'molokai'
 
 " syntax check plugin
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['pyflakes']
 
-" indentLine
-let g:indentLine_char="‣"
-let g:indentLine_fileType = ['c', 'cpp', 'javascript', 'python', 'html', 'json']
-let g:indentLine_color_term = 240
 
 "html css
 let g:user_emmet_install_global = 0
@@ -217,23 +200,5 @@ let g:emmet_indent_size = 2
 let g:emmet_html5=1
 let g:tern#is_show_argument_hints_enabled=1
 
-" vim-javascritp setting
-" let g:javascript_conceal_function   = "ƒ"
-" let g:javascript_conceal_null       = "ø"
-" let g:javascript_conceal_return     = "ℛ"
-" let g:javascript_conceal_this       = "⅀"
-" let g:javascript_conceal_undefined  = "¿"
-" let g:javascript_conceal_NaN        = "ℕ"
-" let g:javascript_conceal_prototype  = "¶"
-" let g:javascript_conceal_static     = "•"
-" let g:javascript_conceal_super      = "Ω"
-
-
-" minibufexpl
-" MiniBufExpl Colors
-hi MBENormal               guifg=#808080 guibg=fg
-hi MBEChanged              guifg=#CD5907 guibg=fg
-hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
-hi MBEVisibleChanged       guifg=#F1266F guibg=fg
-hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
-hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
+"javascript
+let g:javascript_enable_domhtmlcss = 1
