@@ -25,13 +25,14 @@ set nobackup
 set nowritebackup
 set noswapfile
 set magic
-set bg=dark
+" set bg=dark
 set t_Co=256
 set cursorline
 set cursorcolumn 
 set background=dark
 color wombat256mod
 set lazyredraw
+set novisualbell
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -49,6 +50,12 @@ set hidden          " Hide buffers when they are abandoned
 set mouse=a         " Enable mouse usage (all modes)
 set bs=2            " make backspace behave like normal again
 
+" set listchars=tab:»·,eol:¬,trail:·,precedes:<,extends:>
+" set list
+
+
+
+
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
 imap <C-e> <END>
@@ -62,6 +69,11 @@ nnoremap <leader>l <C-w>l
 " then press ``>`` several times.
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
+
+:nnoremap <Tab> :bnext<CR>
+:nnoremap <S-Tab> :bprevious<CR>
+
+:vnoremap <Tab> >gv
 
 
 
@@ -104,9 +116,17 @@ Plugin 'scrooloose/syntastic'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'vim-scripts/tComment'
 "filetype
 Plugin 'elzr/vim-json'
 Plugin 'jade.vim'
+Plugin 'godlygeek/taabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'fatih/vim-go'
+
+" js beautify
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -198,7 +218,32 @@ let g:user_emmet_leader_key='<C-l>'
 let g:user_emmet_mode='a'
 let g:emmet_indent_size = 2
 let g:emmet_html5=1
-let g:tern#is_show_argument_hints_enabled=1
+
+" let g:tern#is_show_argument_hints_enabled=1
+let g:tern_show_argument_hints='on_hold'
+let g:tern_map_keys=1
 
 "javascript
 let g:javascript_enable_domhtmlcss = 1
+
+" markdown setting
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter=1
+
+"js beautify
+map <c-f> :call JsBeautify()<cr>
+" or
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+
+" setting for go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
