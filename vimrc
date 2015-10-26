@@ -21,16 +21,23 @@ if has("syntax")
   syntax on
 endif
 
+
+if has('gui_running')
+  set guifont=Inconsolata\ Bold\ 12
+endif
+
 set nobackup
 set nowritebackup
 set noswapfile
 set magic
 " set bg=dark
 set t_Co=256
-set cursorline
+" set cursorline   hight current line
 set cursorcolumn 
 set background=dark
 color wombat256mod
+" color smyck
+" color random
 set lazyredraw
 set novisualbell
 
@@ -50,10 +57,10 @@ set hidden          " Hide buffers when they are abandoned
 set mouse=a         " Enable mouse usage (all modes)
 set bs=2            " make backspace behave like normal again
 
+highlight Pmenu guibg=brown gui=bold
+
 " set listchars=tab:»·,eol:¬,trail:·,precedes:<,extends:>
 " set list
-
-
 
 
 nnoremap <leader>n :bn<cr>
@@ -82,6 +89,8 @@ set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=80
 highlight ColorColumn ctermbg=200
+highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
+highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
 
 " Real programmers don't use TABs but spaces
 set cindent
@@ -92,7 +101,7 @@ set sts=4
 set ts=4
 set pastetoggle=<F2>
 set nowrap
-autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2 sts=2
 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -108,25 +117,28 @@ Plugin 'scrooloose/nerdtree'      "文件浏览
 Plugin 'bling/vim-airline'
 Plugin 'mattn/emmet-vim'
 Plugin 'The-NERD-Commenter'
-Plugin 'surround.vim'
 Plugin 'pangloss/vim-javascript'
+
 "tools 
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'marijnh/tern_for_vim'
-Plugin 'vim-scripts/tComment'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'fholgado/minibufexpl.vim'
+
 "filetype
 Plugin 'elzr/vim-json'
 Plugin 'jade.vim'
-Plugin 'godlygeek/taabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'fatih/vim-go'
 
 " js beautify
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'einars/js-beautify'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -198,7 +210,7 @@ let g:airline#extensions#virtualenv#enabled = 1
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
 endif
-let g:airline_theme             = 'molokai'
+let g:airline_theme             = 'wombat'
 
 " syntax check plugin
 set statusline+=%#warningmsg#
@@ -247,3 +259,11 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+" MiniBufExpl Colors
+hi MBENormal               guifg=#808080 guibg=fg
+hi MBEChanged              guifg=#CD5907 guibg=fg
+hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
+hi MBEVisibleChanged       guifg=#F1266F guibg=fg
+hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
+hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
