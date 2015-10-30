@@ -1,0 +1,9 @@
+Host vultr
+    HostName 45.32.248.144
+    user     root
+    port     22
+
+Host uuloop
+    HostName uuloop
+    user     root
+    port     22
