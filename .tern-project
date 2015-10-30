@@ -1,0 +1,17 @@
+{
+  "libs": [
+    "jquery",
+    "ecma5",
+    "underscore"
+  ],
+  "plugins": {
+    "node": {},
+    "node-express": {},
+    "node-mongoose": {},
+    "angular": {},
+    "requirejs": {
+      "baseURL": "./",
+      "paths": {}
+    }
+  }
+}
