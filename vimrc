@@ -21,25 +21,23 @@ if has("syntax")
   syntax on
 endif
 
-
-if has('gui_running')
-  set guifont=Inconsolata\ Bold\ 12
-endif
-
 set nobackup
 set nowritebackup
 set noswapfile
 set magic
-" set bg=dark
 set t_Co=256
-" set cursorline   hight current line
+set cursorline   "hight current line
 set cursorcolumn 
-set background=dark
-color wombat256mod
-" color smyck
-" color random
+set bg=dark
+" color emacs
+color synic
 set lazyredraw
 set novisualbell
+
+if has('gui_running')
+  set guifont=Inconsolata\ Bold\ 12
+  color molokai
+endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -59,8 +57,8 @@ set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-" set listchars=tab:»·,eol:¬,trail:·,precedes:<,extends:>
-" set list
+set listchars=tab:»·,eol:¬,trail:·,precedes:<,extends:>
+set list
 
 
 nnoremap <leader>n :bn<cr>
@@ -88,7 +86,7 @@ set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=80
-highlight ColorColumn ctermbg=200
+highlight ColorColumn ctermbg=210
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
 highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
 
@@ -147,9 +145,7 @@ filetype plugin indent on    " required
 nmap <F8> :TagbarToggle<CR>
 nmap <F3> :NERDTreeToggle<CR>
 nmap <silent><leader>t :NERDTreeToggle<CR>
-nmap <silent><leader>bn :bn<CR>
-nmap <silent><leader>bp :bp<CR>
-
+let g:NERDTreeChDirMode=2
 " commenter
 let g:NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
 let g:NERDCompactSexyComs=1   " 多行注释时样子更好看
