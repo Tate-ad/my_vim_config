@@ -1,13 +1,14 @@
 {
   "libs": [
     "jquery",
-    "ecma5",
+    "ecma6",
     "underscore"
   ],
   "plugins": {
     "node": {},
     "node-express": {},
     "node-mongoose": {},
+    "grunt": {},
     "angular": {},
     "requirejs": {
       "baseURL": "./",
