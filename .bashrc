@@ -98,6 +98,9 @@ alias ad='axel -n 10'
 alias v='vim'
 alias open='xdg-open'
 alias mg='mongo'
+alias g='git'
+alias am='atom .'
+alias wk='workon'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -124,10 +127,10 @@ if ! shopt -oq posix; then
 fi
 
 # for java
-export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60
-export JRE_HOME=${JAVA_HOME}/jre
-export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-export PATH={JAVA_HOME}/bin:$PATH
+# export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60
+# export JRE_HOME=${JAVA_HOME}/jre
+# export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+# export PATH={JAVA_HOME}/bin:$PATH
 
 # virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
@@ -140,4 +143,12 @@ export NVM_DIR="/home/tate/.nvm"
 # golang setting
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
-export GOPATH=$HOME/Templates/goweb
+export GOPATH=$HOME/learn/goweb
+
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_65
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH={JAVA_HOME}/bin:$PATH
+
+# make caps_lock as esc key
+xmodmap ~/.Xmodmap
