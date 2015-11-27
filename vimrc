@@ -21,16 +21,19 @@ if has("syntax")
   syntax on
 endif
 
-set nobackup
-set nowritebackup
+" set nobackup
+set backupdir=~/.vimbackup
+set writebackup
+set backupcopy=auto
+
 set noswapfile
 set magic
 set t_Co=256
 set cursorline   "hight current line
 set cursorcolumn 
 set bg=dark
-" color emacs
-color synic
+color wombat256mod
+" color synic
 set lazyredraw
 set novisualbell
 
@@ -57,7 +60,7 @@ set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-set listchars=tab:»·,eol:¬,trail:·,precedes:<,extends:>
+set listchars=tab:»·,trail:·,precedes:<,extends:>
 set list
 
 
@@ -126,6 +129,18 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'vim-scripts/vim-auto-save'
+Plugin 'Yggdroot/indentLine'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'mklabs/grunt.vim'
+" Plugin 'geekjuice/vim-mocha'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" " Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+Plugin 'chrisgillis/vim-bootstrap3-snippets'
+" "
 
 "filetype
 Plugin 'elzr/vim-json'
@@ -183,6 +198,7 @@ set laststatus=2
 """"""""""""""""""""""""""""""
 let g:airline_enable = 1
 let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '▶'
 let g:airline_right_sep = '◀'
 let g:airline_detect_paste=1
 let g:airline_mode_map = {
@@ -263,3 +279,27 @@ hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
 hi MBEVisibleChanged       guifg=#F1266F guibg=fg
 hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
 hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" ctrl_p
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+  \ }
+
+" auto-save
+let g:auto_save = 0
+let g:auto_save_in_insert_mode = 0  "do not save while in insert mode
+
+" indentLine
+let g:indentLine_color_term = 239
+let g:indentLine_char = '|'
+
