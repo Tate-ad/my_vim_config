@@ -152,3 +152,9 @@ export PATH={JAVA_HOME}/bin:$PATH
 
 # make caps_lock as esc key
 xmodmap ~/.Xmodmap
+
+# terminal http_proxy
+# export HTTP_PROXY=http://192.168.1.236:8787
+
+alias yd="youtube-dl"
+# export HTTP_PROXY=http://192.168.1.236:8787
