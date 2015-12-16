@@ -4,6 +4,6 @@ Host vultr
     port     22
 
 Host uuloop
-    HostName uuloop
+    HostName 123.57.70.242
     user     root
     port     22

@@ -132,8 +132,6 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'mklabs/grunt.vim'
-" Plugin 'geekjuice/vim-mocha'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
