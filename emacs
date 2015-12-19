@@ -21,6 +21,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (wombat)))
  '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
  '(tooltip-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -87,3 +88,10 @@
 
 ;;; jade-mode
 (require 'jade-mode)
+
+
+;;; switch buffer quickly
+(require 'ido)
+(ido-mode 'buffer)
+(setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
+               "*Messages*" "Async Shell Command"))

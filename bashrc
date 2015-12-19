@@ -101,6 +101,8 @@ alias mg='mongo'
 alias g='git'
 alias am='atom .'
 alias wk='workon'
+alias tr='tmuxinator'
+alias proxy='proxychains4'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -127,34 +129,35 @@ if ! shopt -oq posix; then
 fi
 
 # for java
-# export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_60
-# export JRE_HOME=${JAVA_HOME}/jre
-# export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-# export PATH={JAVA_HOME}/bin:$PATH
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_25
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH={JAVA_HOME}/bin:$PATH
 
 # virtualenvwrapper
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-export WORKON_HOME=~/Public/Envs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
 export NVM_DIR="/home/tate/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # golang setting
-export GOROOT=/usr/local/go
+export GOROOT=/opt/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/learn/goweb
 
+# java env
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_65
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-export PATH={JAVA_HOME}/bin:$PATH
+export PATH=${JAVA_HOME}/bin:$PATH
+
+#node env
+export PATH=/opt/node/bin:$PATH
 
 # make caps_lock as esc key
 xmodmap ~/.Xmodmap
 
-# terminal http_proxy
-# export HTTP_PROXY=http://192.168.1.236:8787
-
 alias yd="youtube-dl"
-# export HTTP_PROXY=http://192.168.1.236:8787
+export EDITOR=vim
