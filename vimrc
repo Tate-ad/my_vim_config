@@ -132,6 +132,12 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimshell.vim'
+
+" go ide
+Plugin 'vim-jp/vim-go-extra'
+Plugin 'rjohnsondev/vim-compiler-go'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -301,3 +307,50 @@ let g:auto_save_in_insert_mode = 0  "do not save while in insert mode
 let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
 
+
+" vim shell
+let g:vimshell_prompt = '>'
+
+" go-extra
+autocmd FileType go compiler golang
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+let g:golang_goroot = "/opt/go"
+
+" syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" for html
+let g:syntastic_html_tidy_exec = 'tidy'
+let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_always_populate_loc_list = 1
+
+" gotags
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
