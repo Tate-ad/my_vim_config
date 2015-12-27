@@ -15,22 +15,22 @@ autocmd! BufWritePost ~/.vimrc source %
 " options, so any other options should be set AFTER setting 'compatible'.
 set nocompatible
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
+" Vim5 and later versions support syntax highlighting. Uncommenting the next 
 " line enables syntax highlighting by default.
 if has("syntax")
   syntax on
 endif
 
 " set nobackup
-set backupdir=~/.vimbackup
 set writebackup
+set autoread
+set backupdir=~/.vimbackup
 set backupcopy=auto
-
 set noswapfile
 set magic
 set t_Co=256
 set cursorline   "hight current line
-set cursorcolumn 
+set cursorcolumn
 set bg=dark
 color wombat256mod
 " color synic
@@ -55,7 +55,7 @@ set incsearch       " Incremental search
 set hlsearch
 set autowrite       " Automatically save before commands like :next         and :make
 set hidden          " Hide buffers when they are abandoned
-set mouse=a         " Enable mouse usage (all modes)
+set mouse+=a         " Enable mouse usage (all modes)
 set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
@@ -85,11 +85,14 @@ vnoremap > >gv  " better indentation
 
 
 
-set tw=79   " width of document (used by gd)
-set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
+
+set fo+=tw   "auto wrap require formatoptions+=t"
+set tw=99  " width of document (used by gd)
+set wrap nolinebreak nolist
+set colorcolumn=100
 highlight ColorColumn ctermbg=210
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%99v.\+/
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
 highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
 
@@ -101,7 +104,6 @@ set sw=4
 set sts=4
 set ts=4
 set pastetoggle=<F2>
-set nowrap
 autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2 sts=2
 
 filetype off
@@ -120,7 +122,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'The-NERD-Commenter'
 Plugin 'pangloss/vim-javascript'
 
-"tools 
+"tools
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'editorconfig/editorconfig-vim'
@@ -134,6 +136,10 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
+Plugin 'moll/vim-node'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'yegappan/grep'
+Plugin 'kshenoy/vim-signature'
 
 " go ide
 Plugin 'vim-jp/vim-go-extra'
@@ -141,7 +147,7 @@ Plugin 'rjohnsondev/vim-compiler-go'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
-" " Snippets are separated from the engine. Add this if you want them:
+" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 Plugin 'chrisgillis/vim-bootstrap3-snippets'
 " "
@@ -183,7 +189,7 @@ inoremap <Tab> <C-x><C-o>
 let g:ycm_confirm_extra_conf=0
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt=0
-let g:ycm_seed_identifiers_with_syntax=1    
+let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 "注释和字符串中的文字也会被收入补全
@@ -194,8 +200,8 @@ let g:ycm_collect_identifiers_from_tags_files=1
 
 " powerline
 set laststatus=2
-" set fillchars+=stl:\ ,stlnc:\
-" let g:Powerline_symbols='unicode'
+set fillchars+=stl:\ ,stlnc:\
+let g:Powerline_symbols='unicode'
 
 """"""""""""""""""""""""""""""
 " airline
@@ -220,18 +226,14 @@ let g:airline_mode_map = {
   \ }
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
 endif
-let g:airline_theme             = 'wombat'
-
-" syntax check plugin
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" let g:airline_theme             = 'wombat'
+let g:airline_theme             = 'papercolor'
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['jshint']
@@ -258,8 +260,8 @@ let g:javascript_enable_domhtmlcss = 1
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
-"js beautify
-map <c-f> :call JsBeautify()<cr>
+" js beautify
+" map <c-f> :call JsBeautify()<cr>
 " or
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
@@ -300,8 +302,8 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " auto-save
-let g:auto_save = 0
-let g:auto_save_in_insert_mode = 0  "do not save while in insert mode
+" let g:auto_save = 1
+" let g:auto_save_in_insert_mode = 0  "do not save while in insert mode
 
 " indentLine
 let g:indentLine_color_term = 239
@@ -309,48 +311,10 @@ let g:indentLine_char = '|'
 
 
 " vim shell
-let g:vimshell_prompt = '>'
-
-" go-extra
-autocmd FileType go compiler golang
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
-let g:golang_goroot = "/opt/go"
-
-" syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+let g:vimshell_prompt = '>>>'
 
 " for html
 let g:syntastic_html_tidy_exec = 'tidy'
-let g:syntastic_javascript_checkers = ['jslint']
+" let g:syntastic_javascript_checkers = ['jslint']
 let g:syntastic_always_populate_loc_list = 1
 
-" gotags
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
