@@ -33,7 +33,7 @@ set cursorline   "hight current line
 set cursorcolumn
 set bg=dark
 color wombat256mod
-" color synic
+" color molokai
 set lazyredraw
 set novisualbell
 
@@ -63,7 +63,6 @@ highlight Pmenu guibg=brown gui=bold
 set listchars=tab:»·,trail:·,precedes:<,extends:>
 set list
 
-
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
 imap <C-e> <END>
@@ -77,14 +76,9 @@ nnoremap <leader>l <C-w>l
 " then press ``>`` several times.
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
-
 :nnoremap <Tab> :bnext<CR>
 :nnoremap <S-Tab> :bprevious<CR>
-
 :vnoremap <Tab> >gv
-
-
-
 
 set fo+=tw   "auto wrap require formatoptions+=t"
 set tw=99  " width of document (used by gd)
@@ -92,7 +86,7 @@ set wrap nolinebreak nolist
 set colorcolumn=100
 highlight ColorColumn ctermbg=210
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%99v.\+/
+" match OverLength /\%100v.\+/
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
 highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
 
@@ -140,6 +134,8 @@ Plugin 'moll/vim-node'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'yegappan/grep'
 Plugin 'kshenoy/vim-signature'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jeetsukumaran/vim-buffergator'
 
 " go ide
 Plugin 'vim-jp/vim-go-extra'
@@ -174,7 +170,6 @@ let g:NERDTreeChDirMode=2
 " commenter
 let g:NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
 let g:NERDCompactSexyComs=1   " 多行注释时样子更好看
-
 
 " jedi and YCM config
 autocmd FileType python,javascript setlocal completeopt=longest
