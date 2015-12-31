@@ -62,6 +62,7 @@ highlight Pmenu guibg=brown gui=bold
 
 set listchars=tab:»·,trail:·,precedes:<,extends:>
 set list
+set noendofline
 
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
@@ -82,7 +83,7 @@ vnoremap > >gv  " better indentation
 
 set fo+=tw   "auto wrap require formatoptions+=t"
 set tw=99  " width of document (used by gd)
-set wrap nolinebreak nolist
+set wrap
 set colorcolumn=100
 highlight ColorColumn ctermbg=210
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -90,6 +91,9 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
 highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
 
+highlight ExtraWhitespace ctermbg=darkgreen ctermfg=white
+match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /[^\t]\zs\t\+/
 " Real programmers don't use TABs but spaces
 set cindent
 set smartindent
@@ -125,11 +129,11 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'fholgado/minibufexpl.vim'
-Plugin 'vim-scripts/vim-auto-save'
+" Plugin 'vim-scripts/vim-auto-save'
 Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/vimshell.vim'
+" Plugin 'Shougo/vimproc.vim'
+" Plugin 'Shougo/vimshell.vim'
 Plugin 'moll/vim-node'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'yegappan/grep'
@@ -312,4 +316,3 @@ let g:vimshell_prompt = '>>>'
 let g:syntastic_html_tidy_exec = 'tidy'
 " let g:syntastic_javascript_checkers = ['jslint']
 let g:syntastic_always_populate_loc_list = 1
-
