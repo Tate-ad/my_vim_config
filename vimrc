@@ -82,9 +82,9 @@ vnoremap > >gv  " better indentation
 :vnoremap <Tab> >gv
 
 set fo+=tw   "auto wrap require formatoptions+=t"
-set tw=99  " width of document (used by gd)
+set tw=88  " width of document (used by gd)
 set wrap
-set colorcolumn=100
+set colorcolumn=80
 highlight ColorColumn ctermbg=210
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " match OverLength /\%100v.\+/
@@ -94,6 +94,7 @@ highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
 highlight ExtraWhitespace ctermbg=darkgreen ctermfg=white
 match ExtraWhitespace /\s\+$/
 match ExtraWhitespace /[^\t]\zs\t\+/
+
 " Real programmers don't use TABs but spaces
 set cindent
 set smartindent
@@ -113,7 +114,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Auto-Pairs'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'davidhalter/jedi'
+" Plugin 'davidhalter/jedi'
 Plugin 'scrooloose/nerdtree'      "文件浏览
 Plugin 'bling/vim-airline'
 Plugin 'mattn/emmet-vim'
@@ -129,21 +130,14 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'fholgado/minibufexpl.vim'
-" Plugin 'vim-scripts/vim-auto-save'
 Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'Shougo/vimproc.vim'
-" Plugin 'Shougo/vimshell.vim'
 Plugin 'moll/vim-node'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'yegappan/grep'
 Plugin 'kshenoy/vim-signature'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jeetsukumaran/vim-buffergator'
-
-" go ide
-Plugin 'vim-jp/vim-go-extra'
-Plugin 'rjohnsondev/vim-compiler-go'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -171,6 +165,9 @@ nmap <F8> :TagbarToggle<CR>
 nmap <F3> :NERDTreeToggle<CR>
 nmap <silent><leader>t :NERDTreeToggle<CR>
 let g:NERDTreeChDirMode=2
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeDirArrows = 1
+
 " commenter
 let g:NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
 let g:NERDCompactSexyComs=1   " 多行注释时样子更好看
@@ -178,11 +175,11 @@ let g:NERDCompactSexyComs=1   " 多行注释时样子更好看
 " jedi and YCM config
 autocmd FileType python,javascript setlocal completeopt=longest
 set pumheight=10
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#popup_on_dot = 1
-let g:jedi#popup_select_first = 1
-let g:jedi#documentation_command = "K"
-let g:jedi#rename_command = "<leader>r"
+" let g:jedi#use_tabs_not_buffers = 0
+" let g:jedi#popup_on_dot = 1
+" let g:jedi#popup_select_first = 1
+" let g:jedi#documentation_command = "K"
+" let g:jedi#rename_command = "<leader>r"
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <Tab> <C-x><C-o>
 let g:ycm_confirm_extra_conf=0
@@ -192,15 +189,15 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 "注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-let g:ycm_cache_omnifunc=0
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_cache_omnifunc=1
 let g:ycm_min_num_of_chars_for_completion=2
 let g:ycm_collect_identifiers_from_tags_files=1
 
 " powerline
 set laststatus=2
-set fillchars+=stl:\ ,stlnc:\
-let g:Powerline_symbols='unicode'
+" set fillchars+=stl:\ ,stlnc:\
+" let g:Powerline_symbols='unicode'
 
 """"""""""""""""""""""""""""""
 " airline
@@ -225,7 +222,7 @@ let g:airline_mode_map = {
   \ }
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#bufferline#enabled = 0
+let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 if !exists('g:airline_symbols')
@@ -265,7 +262,6 @@ let g:vim_markdown_frontmatter=1
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
 autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
@@ -278,12 +274,12 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 " MiniBufExpl Colors
-hi MBENormal               guifg=#808080 guibg=fg
-hi MBEChanged              guifg=#CD5907 guibg=fg
-hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
-hi MBEVisibleChanged       guifg=#F1266F guibg=fg
-hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
-hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
+let g:miniBufExplHideWhenDiff = 1
+let g:miniBufExplMinSize = 25
+let g:miniBufExplMaxSize = 30
+let g:miniBufExplVSplit = 1
+let g:miniBufExplBRSplit = 1
+let g:miniBufExplStatusLineText = "-已打开文件-"
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-e>"
@@ -296,8 +292,6 @@ let g:UltiSnipsEditSplit="vertical"
 " ctrl_p
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
 
 " auto-save
@@ -308,11 +302,14 @@ let g:ctrlp_custom_ignore = {
 let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
 
-
-" vim shell
-let g:vimshell_prompt = '>>>'
-
 " for html
 let g:syntastic_html_tidy_exec = 'tidy'
 " let g:syntastic_javascript_checkers = ['jslint']
 let g:syntastic_always_populate_loc_list = 1
+
+" gitgutter
+let g:gitgutter_sign_added = 'A'
+let g:gitgutter_sign_modified = 'M'
+let g:gitgutter_sign_removed = 'R'
+let g:gitgutter_sign_removed_first_line = '^^'
+let g:gitgutter_sign_modified_removed = 'ww'
