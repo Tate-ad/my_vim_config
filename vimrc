@@ -45,7 +45,6 @@ endif
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 let mapleader=","
-set nocompatible    " be iMproved, required
 set number          " show line number
 set showcmd         " Show (partial) command in status line.
 set showmatch       " Show matching brackets.
@@ -60,9 +59,8 @@ set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-set listchars=tab:»·,trail:·,precedes:<,extends:>
-set list
-set noendofline
+" set listchars=tab:»·,trail:·,precedes:<,extends:>
+set noendofline "why?
 
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
@@ -81,9 +79,10 @@ vnoremap > >gv  " better indentation
 :nnoremap <S-Tab> :bprevious<CR>
 :vnoremap <Tab> >gv
 
-set fo+=tw   "auto wrap require formatoptions+=t"
-set tw=88  " width of document (used by gd)
-set wrap
+" set fo+=tw   "auto wrap require formatoptions+=t"
+set wrap linebreak nolist
+set textwidth=80  " width of document (used by gd)
+
 set colorcolumn=80
 highlight ColorColumn ctermbg=210
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -138,6 +137,7 @@ Plugin 'yegappan/grep'
 Plugin 'kshenoy/vim-signature'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'elmcast/elm-vim'    "This is for elm lange
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -183,7 +183,7 @@ set pumheight=10
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <Tab> <C-x><C-o>
 let g:ycm_confirm_extra_conf=0
-set completeopt-=preview
+" set completeopt-=preview " show the preview window
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments = 1
@@ -257,8 +257,6 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
 " js beautify
-" map <c-f> :call JsBeautify()<cr>
-" or
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
@@ -300,7 +298,7 @@ let g:ctrlp_custom_ignore = {
 
 " indentLine
 let g:indentLine_color_term = 239
-let g:indentLine_char = '|'
+let g:indentLine_char = '>'
 
 " for html
 let g:syntastic_html_tidy_exec = 'tidy'
@@ -312,4 +310,4 @@ let g:gitgutter_sign_added = 'A'
 let g:gitgutter_sign_modified = 'M'
 let g:gitgutter_sign_removed = 'R'
 let g:gitgutter_sign_removed_first_line = '^^'
-let g:gitgutter_sign_modified_removed = 'ww'
+let g:gitgutter_sign_modified_removed = 'MR'
