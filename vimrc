@@ -15,7 +15,7 @@ autocmd! BufWritePost ~/.vimrc source %
 " options, so any other options should be set AFTER setting 'compatible'.
 set nocompatible
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next 
+" Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 if has("syntax")
   syntax on
@@ -52,14 +52,15 @@ set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching
 set incsearch       " Incremental search
 set hlsearch
-set autowrite       " Automatically save before commands like :next         and :make
+set autowrite       " Automatically save before commands like :next  and :make
 set hidden          " Hide buffers when they are abandoned
 set mouse+=a         " Enable mouse usage (all modes)
 set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-" set listchars=tab:»·,trail:·,precedes:<,extends:>
+set listchars=tab:»·,trail:·,precedes:<,extends:>
+set list
 set noendofline "why?
 
 nnoremap <leader>n :bn<cr>
@@ -80,9 +81,8 @@ vnoremap > >gv  " better indentation
 :vnoremap <Tab> >gv
 
 " set fo+=tw   "auto wrap require formatoptions+=t"
-set wrap linebreak nolist
-set textwidth=80  " width of document (used by gd)
-
+set wrap linebreak
+set textwidth=79  " width of document (used by gd)
 set colorcolumn=80
 highlight ColorColumn ctermbg=210
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -109,50 +109,39 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'majutsushi/tagbar'
+" Plugin 'Yggdroot/indentLine'
+" Plugin 'davidhalter/jedi'
+" Plugin 'kshenoy/vim-signature'
+" Plugin 'jeetsukumaran/vim-buffergator'
+" Plugin 'vim-ctrlspace/vim-ctrlspace'
+" Plugin 'elzr/vim-json'
+" Plugin 'terryma/vim-multiple-cursors'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Auto-Pairs'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'davidhalter/jedi'
 Plugin 'scrooloose/nerdtree'      "文件浏览
 Plugin 'bling/vim-airline'
 Plugin 'mattn/emmet-vim'
 Plugin 'The-NERD-Commenter'
-Plugin 'pangloss/vim-javascript'
-
-"tools
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'majutsushi/tagbar'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'fholgado/minibufexpl.vim'
-Plugin 'Yggdroot/indentLine'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'moll/vim-node'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'yegappan/grep'
-Plugin 'kshenoy/vim-signature'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'elmcast/elm-vim'    "This is for elm lange
-
-" Track the engine.
 Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 Plugin 'chrisgillis/vim-bootstrap3-snippets'
-" "
-
-"filetype
-Plugin 'elzr/vim-json'
-Plugin 'jade.vim'
-Plugin 'plasticboy/vim-markdown'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'fatih/vim-go'
-
-" js beautify
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'einars/js-beautify'
 
