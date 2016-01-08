@@ -36,6 +36,8 @@ color wombat256mod
 " color molokai
 set lazyredraw
 set novisualbell
+set viminfo+=/100  "set the limit viminfo
+set ttyfast
 
 if has('gui_running')
   set guifont=Inconsolata\ Bold\ 12
