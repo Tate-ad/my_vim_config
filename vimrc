@@ -36,7 +36,7 @@ set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-color wombat256mod
+color seti
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.

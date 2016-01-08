@@ -52,12 +52,9 @@ ubuntu mac theme
     $ sudo xhost +SI:localuser:lightdm
     $ sudo su lightdm -s /bin/bash
     $ gsettings set com.canonical.unity-greeter draw-grid false;exit
-    $ sudo mv /usr/share/unity-greeter/logo.png
-    $ /usr/share/unity-greeter/logo.png.backup
-    $ cd;wget -O logo.png
-    $ http://drive.noobslab.com/data/Mac-14.10/ubuntu_logo.png
-    $ sudo mv logo.png /usr/share/unity-greeter/;gsettings set
-    $ com.canonical.unity-greeter draw-grid false
+    $ sudo mv /usr/share/unity-greeter/logo.png /usr/share/unity-greeter/logo.png.backup
+    $ cd;wget -O logo.png http://drive.noobslab.com/data/Mac-14.10/ubuntu_logo.png
+    $ sudo mv logo.png /usr/share/unity-greeter/;gsettings set com.canonical.unity-greeter draw-grid false
     ```
 
 
