@@ -32,17 +32,11 @@ set t_Co=256
 set cursorline   "hight current line
 set cursorcolumn
 set bg=dark
-color wombat256mod
-" color molokai
-set lazyredraw
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
-
-if has('gui_running')
-  set guifont=Inconsolata\ Bold\ 12
-  color molokai
-endif
+set lazyredraw
+color wombat256mod
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -56,14 +50,14 @@ set incsearch       " Incremental search
 set hlsearch
 set autowrite       " Automatically save before commands like :next  and :make
 set hidden          " Hide buffers when they are abandoned
-set mouse+=a         " Enable mouse usage (all modes)
+set mouse+=a        " Enable mouse usage (all modes)
 set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
 set listchars=tab:»·,trail:·,precedes:<,extends:>
 set list
-set noendofline "why?
+set noendofline     " why?
 
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
@@ -86,7 +80,7 @@ vnoremap > >gv  " better indentation
 set wrap linebreak
 set textwidth=79  " width of document (used by gd)
 set colorcolumn=80
-highlight ColorColumn ctermbg=210
+highlight ColorColumn ctermbg=220
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 " match OverLength /\%100v.\+/
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
@@ -120,8 +114,10 @@ call vundle#begin()
 " Plugin 'vim-ctrlspace/vim-ctrlspace'
 " Plugin 'elzr/vim-json'
 " Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'einars/js-beautify'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'Auto-Pairs'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'      "文件浏览
@@ -138,23 +134,19 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'moll/vim-node'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'yegappan/grep'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'chrisgillis/vim-bootstrap3-snippets'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'fatih/vim-go'
 Plugin 'maksimr/vim-jsbeautify'
-Plugin 'einars/js-beautify'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " tagbar
-nmap <F8> :TagbarToggle<CR>
 nmap <F3> :NERDTreeToggle<CR>
-nmap <silent><leader>t :NERDTreeToggle<CR>
 let g:NERDTreeChDirMode=2
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows = 1
@@ -229,12 +221,6 @@ let g:syntastic_python_checkers = ['pyflakes']
 
 "html css
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-let g:use_emmet_complete_tag = 1
-let g:user_emmet_leader_key='<C-l>'
-let g:user_emmet_mode='a'
-let g:emmet_indent_size = 2
-let g:emmet_html5=1
 
 " let g:tern#is_show_argument_hints_enabled=1
 let g:tern_show_argument_hints='on_hold'
@@ -248,19 +234,8 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
 " js beautify
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
 " setting for go
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
 
 " MiniBufExpl Colors
 let g:miniBufExplHideWhenDiff = 1
@@ -291,14 +266,37 @@ let g:ctrlp_custom_ignore = {
 let g:indentLine_color_term = 239
 let g:indentLine_char = '>'
 
-" for html
-let g:syntastic_html_tidy_exec = 'tidy'
-" let g:syntastic_javascript_checkers = ['jslint']
-let g:syntastic_always_populate_loc_list = 1
-
 " gitgutter
 let g:gitgutter_sign_added = 'A'
 let g:gitgutter_sign_modified = 'M'
 let g:gitgutter_sign_removed = 'R'
 let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = 'MR'
+
+"html
+autocmd FileType html,css EmmetInstall
+let g:syntastic_html_tidy_exec = 'tidy'
+let g:syntastic_always_populate_loc_list = 1
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_leader_key='<C-l>'
+let g:user_emmet_mode='a'
+let g:emmet_indent_size = 2
+let g:emmet_html5=1
+
+" web group
+augroup web
+    autocmd!
+    autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+    autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+    autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+    autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+    autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+    autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+augroup END
+
+" golang group
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
