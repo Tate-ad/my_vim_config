@@ -157,7 +157,7 @@ export PATH=${JAVA_HOME}/bin:$PATH
 export PATH=/opt/node/bin:$PATH
 
 # make caps_lock as esc key
-xmodmap ~/.Xmodmap
+# xmodmap ~/.Xmodmap
 
 alias yd="youtube-dl"
 export EDITOR=vim
