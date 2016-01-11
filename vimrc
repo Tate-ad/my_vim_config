@@ -100,56 +100,47 @@ set ts=4
 set pastetoggle=<F2>
 autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2 sts=2
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-" Plugin 'pangloss/vim-javascript'
-" Plugin 'majutsushi/tagbar'
-" Plugin 'Yggdroot/indentLine'
-" Plugin 'davidhalter/jedi'
-" Plugin 'kshenoy/vim-signature'
-" Plugin 'jeetsukumaran/vim-buffergator'
-" Plugin 'vim-ctrlspace/vim-ctrlspace'
-" Plugin 'elzr/vim-json'
-" Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'einars/js-beautify'
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Auto-Pairs'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdtree'      "文件浏览
-Plugin 'bling/vim-airline'
-Plugin 'mattn/emmet-vim'
-Plugin 'The-NERD-Commenter'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'moll/vim-node'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'yegappan/grep'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'chrisgillis/vim-bootstrap3-snippets'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'fatih/vim-go'
-Plugin 'maksimr/vim-jsbeautify'
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'gregsexton/gitv'
+Plug 'airblade/vim-gitgutter'
+Plug 'Auto-Pairs'
+Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/nerdtree'      "文件浏览
+Plug 'bling/vim-airline'
+Plug 'mattn/emmet-vim'
+Plug 'The-NERD-Commenter'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/syntastic'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'marijnh/tern_for_vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'moll/vim-node'
+Plug 'easymotion/vim-easymotion'
+Plug 'yegappan/grep'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'chrisgillis/vim-bootstrap3-snippets'
+Plug 'sheerun/vim-polyglot'
+Plug 'fatih/vim-go'
+Plug 'maksimr/vim-jsbeautify'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()            " required
 
 " tagbar
 nmap <F3> :NERDTreeToggle<CR>
 let g:NERDTreeChDirMode=2
-let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows = 1
+" let g:NERDTreeQuitOnOpen = 1
 
 " commenter
 let g:NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
@@ -166,7 +157,7 @@ set pumheight=10
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <Tab> <C-x><C-o>
 let g:ycm_confirm_extra_conf=0
-" set completeopt-=preview " show the preview window
+set completeopt-=preview " show the preview window
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments = 1
@@ -179,8 +170,6 @@ let g:ycm_collect_identifiers_from_tags_files=1
 
 " powerline
 set laststatus=2
-" set fillchars+=stl:\ ,stlnc:\
-" let g:Powerline_symbols='unicode'
 
 """"""""""""""""""""""""""""""
 " airline
@@ -204,8 +193,8 @@ let g:airline_mode_map = {
   \ '' : 'S',
   \ }
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#bufferline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 if !exists('g:airline_symbols')
