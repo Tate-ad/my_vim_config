@@ -29,14 +29,15 @@ set backupcopy=auto
 set noswapfile
 set magic
 set t_Co=256
-set cursorline   "hight current line
-set cursorcolumn
+" set cursorline   "hight current line
+" set cursorcolumn
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-set bg=dark
-color seti
+color inkpot
+color codeschool
+color gruvbox
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -76,13 +77,12 @@ vnoremap > >gv  " better indentation
 :nnoremap <S-Tab> :bprevious<CR>
 :vnoremap <Tab> >gv
 
-" set fo+=tw   "auto wrap require formatoptions+=t"
+set fo+=tw   "auto wrap require formatoptions+=t"
 set wrap linebreak
 set textwidth=79  " width of document (used by gd)
 set colorcolumn=80
 highlight ColorColumn ctermbg=220
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-" match OverLength /\%100v.\+/
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
 highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
 
@@ -93,12 +93,12 @@ match ExtraWhitespace /[^\t]\zs\t\+/
 " Real programmers don't use TABs but spaces
 set cindent
 set smartindent
-set expandtab
 set sw=4
 set sts=4
 set ts=4
+set expandtab
 set pastetoggle=<F2>
-autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2 sts=2
+autocmd FileType html,json,yaml setlocal shiftwidth=2 tabstop=2 sts=2 expandtab
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -106,6 +106,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" backup plugin 
+" 'easymotion/vim-easymotion'
+" 'The-NERD-Commenter'
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
@@ -115,7 +118,6 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree'      "文件浏览
 Plug 'bling/vim-airline'
 Plug 'mattn/emmet-vim'
-Plug 'The-NERD-Commenter'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
@@ -124,7 +126,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'moll/vim-node'
-Plug 'easymotion/vim-easymotion'
 Plug 'yegappan/grep'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -132,6 +133,8 @@ Plug 'chrisgillis/vim-bootstrap3-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
 Plug 'maksimr/vim-jsbeautify'
+Plug 'lambdatoast/elm.vim'
+Plug 'Yggdroot/indentLine'
 call plug#end()            " required
 
 " tagbar
@@ -220,10 +223,6 @@ let g:javascript_enable_domhtmlcss = 1
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
-" js beautify
-
-" setting for go
-
 " MiniBufExpl Colors
 let g:miniBufExplHideWhenDiff = 1
 let g:miniBufExplMinSize = 25
@@ -251,7 +250,7 @@ let g:ctrlp_custom_ignore = {
 
 " indentLine
 let g:indentLine_color_term = 239
-let g:indentLine_char = '>'
+let g:indentLine_char = '▸'
 
 " gitgutter
 let g:gitgutter_sign_added = 'A'
