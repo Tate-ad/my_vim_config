@@ -31,11 +31,11 @@ set magic
 set t_Co=256
 set cursorline   "hight current line
 set cursorcolumn
-set bg=dark
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
+set bg=dark
 color seti
 
 " The following are commented out as they cause vim to behave a lot
@@ -55,7 +55,7 @@ set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-set listchars=tab:»·,trail:·,precedes:<,extends:>
+set listchars=tab:▸·,trail:·,precedes:<,extends:>,eol:¬
 set list
 set noendofline     " why?
 
@@ -132,8 +132,6 @@ Plug 'chrisgillis/vim-bootstrap3-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
 Plug 'maksimr/vim-jsbeautify'
-
-" All of your Plugins must be added before the following line
 call plug#end()            " required
 
 " tagbar
