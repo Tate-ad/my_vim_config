@@ -30,14 +30,13 @@ set noswapfile
 set magic
 set t_Co=256
 " set cursorline   "hight current line
-" set cursorcolumn
+set cursorcolumn
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-color inkpot
-color codeschool
-color gruvbox
+colorscheme gruvbox
+set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -67,6 +66,8 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>h <C-w>h
 nnoremap <leader>l <C-w>l
+
+autocmd! FileType javascript nnoremap <C-b> :!node %<CR>
 
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
@@ -135,6 +136,7 @@ Plug 'fatih/vim-go'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'lambdatoast/elm.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'majutsushi/tagbar'
 call plug#end()            " required
 
 " tagbar
@@ -194,8 +196,8 @@ let g:airline_mode_map = {
   \ '' : 'S',
   \ }
 
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 if !exists('g:airline_symbols')
@@ -224,12 +226,12 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
 " MiniBufExpl Colors
-let g:miniBufExplHideWhenDiff = 1
-let g:miniBufExplMinSize = 25
-let g:miniBufExplMaxSize = 30
-let g:miniBufExplVSplit = 1
-let g:miniBufExplBRSplit = 1
-let g:miniBufExplStatusLineText = "-已打开文件-"
+" let g:miniBufExplHideWhenDiff = 1
+" let g:miniBufExplMinSize = 25
+" let g:miniBufExplMaxSize = 30
+" let g:miniBufExplVSplit = 1
+" let g:miniBufExplBRSplit = 1
+" let g:miniBufExplStatusLineText = "-已打开文件-"
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-e>"
