@@ -159,5 +159,5 @@ export PATH=/opt/node/bin:$PATH
 # make caps_lock as esc key
 # xmodmap ~/.Xmodmap
 
-alias yd="youtube-dl"
+alias yd="proxy youtube-dl"
 export EDITOR=vim

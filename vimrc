@@ -30,13 +30,13 @@ set noswapfile
 set magic
 set t_Co=256
 " set cursorline   "hight current line
-set cursorcolumn
+" set cursorcolumn
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-colorscheme gruvbox
-set bg=dark
+" colorscheme gruvbox
+" set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
