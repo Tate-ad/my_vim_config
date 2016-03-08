@@ -35,8 +35,8 @@ set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-" colorscheme gruvbox
-" set bg=dark
+colorscheme wombat256mod
+set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -55,7 +55,7 @@ set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-set listchars=tab:▸·,trail:·,precedes:<,extends:>,eol:¬
+set listchars=tab:▸·,trail:·,precedes:<,extends:>
 set list
 set noendofline     " why?
 
@@ -137,6 +137,8 @@ Plug 'maksimr/vim-jsbeautify'
 Plug 'lambdatoast/elm.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
+Plug 'reedes/vim-pencil'
+Plug 'easymotion/vim-easymotion'
 call plug#end()            " required
 
 " tagbar
@@ -204,7 +206,7 @@ if !exists('g:airline_symbols')
       let g:airline_symbols = {}
 endif
 " let g:airline_theme             = 'wombat'
-let g:airline_theme             = 'papercolor'
+" let g:airline_theme             = 'papercolor'
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['jshint']
@@ -252,7 +254,7 @@ let g:ctrlp_custom_ignore = {
 
 " indentLine
 let g:indentLine_color_term = 239
-let g:indentLine_char = '▸'
+let g:indentLine_char = '|'
 
 " gitgutter
 let g:gitgutter_sign_added = 'A'
@@ -288,3 +290,15 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+
+" vim pencil
+let g:pencil#wrapModeDefault = 'soft'
+let g:pencil#autoformat = 1
+let g:pencil#textwidth = 80
+
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text         call pencil#init({'wrap': 'hard'})
+augroup END
