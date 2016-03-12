@@ -35,7 +35,8 @@ set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-colorscheme wombat256mod
+" colorscheme wombat256mod
+colorscheme jellybeans
 set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
@@ -139,6 +140,11 @@ Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
 Plug 'reedes/vim-pencil'
 Plug 'easymotion/vim-easymotion'
+Plug 'suan/vim-instant-markdown'
+Plug 'vim-airline/vim-airline-themes'
+
+" node-vim-debuggr
+Plug 'sidorares/node-vim-debugger'
 call plug#end()            " required
 
 " tagbar
@@ -206,7 +212,7 @@ if !exists('g:airline_symbols')
       let g:airline_symbols = {}
 endif
 " let g:airline_theme             = 'wombat'
-" let g:airline_theme             = 'papercolor'
+let g:airline_theme             = 'molokai'
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['jshint']
@@ -228,12 +234,12 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
 " MiniBufExpl Colors
-" let g:miniBufExplHideWhenDiff = 1
-" let g:miniBufExplMinSize = 25
-" let g:miniBufExplMaxSize = 30
-" let g:miniBufExplVSplit = 1
-" let g:miniBufExplBRSplit = 1
-" let g:miniBufExplStatusLineText = "-已打开文件-"
+let g:miniBufExplHideWhenDiff = 1
+let g:miniBufExplMinSize = 25
+let g:miniBufExplMaxSize = 30
+let g:miniBufExplVSplit = 1
+let g:miniBufExplBRSplit = 1
+let g:miniBufExplStatusLineText = "-已打开文件-"
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-e>"
@@ -309,3 +315,6 @@ if has("gui_running")
     set t_Co=256
     set lines=42 columns=180
 endif
+"ultisnips setting
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
