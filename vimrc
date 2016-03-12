@@ -302,3 +302,10 @@ augroup pencil
     autocmd FileType markdown,mkd call pencil#init()
     autocmd FileType text         call pencil#init({'wrap': 'hard'})
 augroup END
+
+if has("gui_running")
+    set guifont=Monaco:h14
+    set guioptions-=T
+    set t_Co=256
+    set lines=42 columns=180
+endif
