@@ -68,7 +68,7 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>h <C-w>h
 nnoremap <leader>l <C-w>l
 
-autocmd! FileType javascript nnoremap <C-b> :!node %<CR>
+" autocmd! FileType javascript nnoremap <C-b> :!node %<CR>
 
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
@@ -142,6 +142,7 @@ Plug 'reedes/vim-pencil'
 Plug 'easymotion/vim-easymotion'
 Plug 'suan/vim-instant-markdown'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mileszs/ack.vim'
 
 " node-vim-debuggr
 Plug 'sidorares/node-vim-debugger'
@@ -251,7 +252,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " ctrl_p
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|(node_modules)$',
   \ }
 
 " auto-save
@@ -282,12 +283,12 @@ let g:emmet_html5=1
 " web group
 augroup web
     autocmd!
-    autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-    autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-    autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-    autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-    autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-    autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+    autocmd FileType javascript noremap <buffer><leader><c-f> :call JsBeautify()<cr>
+    autocmd FileType html noremap <buffer><leader><c-f> :call HtmlBeautify()<cr>
+    autocmd FileType css noremap <buffer><leader><c-f> :call CSSBeautify()<cr>
+    autocmd FileType javascript vnoremap <buffer><leader>  <c-f> :call RangeJsBeautify()<cr>
+    autocmd FileType html vnoremap <buffer><leader><c-f> :call RangeHtmlBeautify()<cr>
+    autocmd FileType css vnoremap <buffer><leader><c-f> :call RangeCSSBeautify()<cr>
 augroup END
 
 " golang group
@@ -318,3 +319,6 @@ endif
 "ultisnips setting
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+"for search
+let g:ackprg = 'ag --nogroup --nocolor --column'

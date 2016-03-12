@@ -8,3 +8,9 @@ soft intall on ubuntu linux
     $ sudo apt-get update
     $ sudo apt-get install nodejs
     ```
+
+2. vim markdown preview tool
+    
+    ```bash
+    $ npm -g install instant-markdown-d
+    ```
