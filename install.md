@@ -13,4 +13,7 @@ soft intall on ubuntu linux
     
     ```bash
     $ npm -g install instant-markdown-d
+    $ mkdir -p ~/.vim/after/ftplugin/markdown/
+    $ cd ~/.vim/after/ftplugin/markdown
+    $ wget https://raw.githubusercontent.com/suan/vim-instant-markdown/master/after/ftplugin/markdown/instant-markdown.vim
     ```
