@@ -35,8 +35,8 @@ set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-" colorscheme wombat256mod
-colorscheme jellybeans
+" colorscheme jellybeans
+colorscheme gruvbox
 set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
