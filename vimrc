@@ -35,8 +35,8 @@ set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-" colorscheme jellybeans
-colorscheme gruvbox
+colorscheme jellybeans
+" colorscheme gruvbox
 set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
@@ -271,7 +271,7 @@ let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = 'MR'
 
 "html
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,jst EmmetInstall
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_always_populate_loc_list = 1
 let g:use_emmet_complete_tag = 1
@@ -322,3 +322,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "for search
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+let g:tern_request_timeout = 6000
+
