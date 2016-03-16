@@ -36,8 +36,8 @@ set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
 " colorscheme jellybeans
-colorscheme gruvbox
 set bg=dark
+colorscheme solarized
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -318,6 +318,8 @@ if has("gui_running")
     set lines=50 columns=180
     set guioptions-=r
     set guioptions-=L
+    set bg=dark
+    colorscheme solarized
     hi Pmenu guibg=pink guifg=white
     set pumheight=15
     " hi PmenuSel guibg=white guifg=pink
@@ -330,3 +332,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:tern_request_timeout = 6000
 
+
+"set scheme
+let g:solarized_termcolors=256
