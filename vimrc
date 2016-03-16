@@ -35,8 +35,8 @@ set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
-colorscheme jellybeans
-" colorscheme gruvbox
+" colorscheme jellybeans
+colorscheme gruvbox
 set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
@@ -83,7 +83,7 @@ set fo+=tw   "auto wrap require formatoptions+=t"
 set wrap linebreak
 set textwidth=79  " width of document (used by gd)
 set colorcolumn=80
-highlight ColorColumn ctermbg=220
+highlight ColorColumn ctermbg=220 guibg=yellow
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
 highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
@@ -143,8 +143,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'suan/vim-instant-markdown'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
-
-" node-vim-debuggr
 Plug 'sidorares/node-vim-debugger'
 call plug#end()            " required
 
@@ -222,6 +220,9 @@ let g:syntastic_python_checkers = ['pyflakes']
 
 "html css
 let g:user_emmet_install_global = 0
+autocmd FileType html,css,jst EmmetInstall
+let g:user_emmet_leader_key='<C-l>'
+let g:user_emmet_mode='a'
 
 " let g:tern#is_show_argument_hints_enabled=1
 let g:tern_show_argument_hints='on_hold'
@@ -311,10 +312,15 @@ augroup pencil
 augroup END
 
 if has("gui_running")
-    set guifont=Monaco:h14
+    set guifont=Consolas:h15
     set guioptions-=T
     set t_Co=256
-    set lines=42 columns=180
+    set lines=50 columns=180
+    set guioptions-=r
+    set guioptions-=L
+    hi Pmenu guibg=pink guifg=white
+    set pumheight=15
+    " hi PmenuSel guibg=white guifg=pink
 endif
 "ultisnips setting
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -322,6 +328,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "for search
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
 let g:tern_request_timeout = 6000
 
