@@ -36,8 +36,9 @@ set viminfo+=/100  "set the limit viminfo
 set ttyfast
 set lazyredraw
 " colorscheme jellybeans
+" colorscheme solarized
+colorscheme monokai
 set bg=dark
-colorscheme solarized
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -119,11 +120,12 @@ Plug 'Auto-Pairs'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree'      "文件浏览
 Plug 'bling/vim-airline'
-Plug 'mattn/emmet-vim'
 Plug 'kien/ctrlp.vim'
+Plug 'mattn/emmet-vim'
+Plug 'wincent/command-t'
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'marijnh/tern_for_vim'
+" Plug 'marijnh/tern_for_vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'fholgado/minibufexpl.vim'
@@ -236,12 +238,14 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
 " MiniBufExpl Colors
-let g:miniBufExplHideWhenDiff = 1
-let g:miniBufExplMinSize = 25
-let g:miniBufExplMaxSize = 30
-let g:miniBufExplVSplit = 1
-let g:miniBufExplBRSplit = 1
-let g:miniBufExplStatusLineText = "-已打开文件-"
+let g:miniBufExplorerAutoStart = 1
+let g:miniBufExplBuffersNeeded = 1
+" let g:miniBufExplHideWhenDiff = 1
+" let g:miniBufExplMinSize = 25
+" let g:miniBufExplMaxSize = 30
+" let g:miniBufExplVSplit = 1
+" let g:miniBufExplBRSplit = 1
+" let g:miniBufExplStatusLineText = "-已打开文件-"
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-e>"
@@ -312,15 +316,18 @@ augroup pencil
 augroup END
 
 if has("gui_running")
-    set guifont=Consolas:h15
+    set guifont=Meslo_LG_S:h14
+    " set guifont=Menlo:h16
+    set guifont=Menlo:h16
     set guioptions-=T
     set t_Co=256
     set lines=50 columns=180
     set guioptions-=r
     set guioptions-=L
     set bg=dark
-    colorscheme solarized
+    " colorscheme solarized
     hi Pmenu guibg=pink guifg=white
+    hi Cursor guifg=white guibg=pink
     set pumheight=15
     " hi PmenuSel guibg=white guifg=pink
 endif
@@ -335,3 +342,10 @@ let g:tern_request_timeout = 6000
 
 "set scheme
 let g:solarized_termcolors=256
+
+set enc=utf-8
+set fileencoding=utf-8
+
+" commandT ignore
+
+let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*". ",**/node_modules/*"
