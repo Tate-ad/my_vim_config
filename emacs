@@ -8,90 +8,65 @@
                   ))
   (add-to-list 'package-archives source t))
 (package-initialize)
-;;; package source
 
 
-
-;; custome setting
-(require 'main-line)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (wombat)))
- '(scroll-bar-mode nil)
- '(tool-bar-mode nil)
- '(tooltip-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))))
-
-;; global mode
-(global-linum-mode 1)
-(global-auto-revert-mode 1)
-(setq inhibit-startup-message t)
+;;; no message on start up
+(setq inhibit-startup-screen t)
+(add-to-list 'default-frame-alist '(width . 160))
+(add-to-list 'default-frame-alist '(height . 50))
 
 
-;; quick switch windows, ace-window
-(global-set-key (kbd "M-p") 'ace-window)
+;;; theme setting and font
+(load-theme 'monokai t)
+(add-to-list 'default-frame-alist '(font . "Menlo-14"))
+(require 'powerline)
+(powerline-center-theme)
 
-;; js2-mode setting
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-hook 'js-mode-hook 'js2-minor-mode)
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-(setq js-indent-level 4)
-(setq-default indent-tabs-mode nil)
-;; ac-js2-mode
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-(require 'yasnippet)
-(yas-global-mode 1)
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+;;; frame window setting
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(setq frame-title-format "Tate")
+
+;;; anthor setting
+(ido-mode)
+(column-number-mode)
+(show-paren-mode)
+
+;;;
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (ac-config-default)
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
 
-;; autopair
-(require 'autopair)
+;;;
+(global-nlinum-mode)
 (autopair-global-mode)
 
-;; ternjs
-(add-to-list 'load-path "/home/tate/.emacs.d/elpa/tern/emacs")
+;;; undo-tree
+(global-undo-tree-mode)
+(global-set-key (kbd "M-/") 'undo-tree-visualize)
+
+
+;;; switch-window
+(global-set-key (kbd "C-M-z") 'switch-window)
+
+;;;ace-jump-mode
+(global-set-key (kbd "C->") 'ace-jump-mode)
+
+;;; alpha
+(global-set-key (kbd "C-M-)") 'transparency-increase)
+(global-set-key (kbd "C-M-(") 'transparency-decrease)
+
+
+
+;;;js2-mode
+(add-hook 'js-mode 'js2-mode)
+(setq js-indent-level 4)
+(require 'tern)
 (autoload 'tern-mode "tern.el" nil t)
-(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-(eval-after-load 'tern
- '(progn
-     (require 'tern-auto-complete)
-     (tern-ac-setup)))
+(add-hook 'js2-mode (lambda()(tern-mode t)))
 
-;; nodejs
-(require 'nodejs-repl)
-(require 'js2-refactor)
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
+;;; web-mode
+(require 'web-mode)
 
-;; backup
-(setq backup-by-copying t
-    backup-directory-alist '(("~/.emacs_backup"))
-    delete-old-version t
-    kept-new-version 6
-    kept-old-version 2
-    version-control t)
-
-;; highlight
-;; (require 'highlight-tail)
-;; (highlight-tail-mode)
-
-;;; jade-mode
-(require 'jade-mode)
-
-
-;;; switch buffer quickly
-(require 'ido)
-(ido-mode 'buffer)
-(setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
-               "*Messages*" "Async Shell Command"))
+(add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
