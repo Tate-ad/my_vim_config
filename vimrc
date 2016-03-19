@@ -34,11 +34,9 @@ set t_Co=256
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
-set lazyredraw
-" colorscheme jellybeans
-" colorscheme solarized
-colorscheme monokai
-set bg=dark
+" set lazyredraw
+colorscheme solarized
+" set bg=dark
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -84,7 +82,7 @@ set fo+=tw   "auto wrap require formatoptions+=t"
 set wrap linebreak
 set textwidth=79  " width of document (used by gd)
 set colorcolumn=80
-highlight ColorColumn ctermbg=220 guibg=yellow
+highlight ColorColumn ctermbg=220 guifg=yellow
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
 highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
@@ -112,6 +110,7 @@ endif
 " backup plugin 
 " 'easymotion/vim-easymotion'
 " 'The-NERD-Commenter'
+" 'marijnh/tern_for_vim'
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
@@ -122,10 +121,8 @@ Plug 'scrooloose/nerdtree'      "文件浏览
 Plug 'bling/vim-airline'
 Plug 'kien/ctrlp.vim'
 Plug 'mattn/emmet-vim'
-Plug 'wincent/command-t'
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'marijnh/tern_for_vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'fholgado/minibufexpl.vim'
@@ -145,8 +142,10 @@ Plug 'easymotion/vim-easymotion'
 Plug 'suan/vim-instant-markdown'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
-Plug 'sidorares/node-vim-debugger'
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimshell.vim'
 call plug#end()            " required
+
 
 " tagbar
 nmap <F3> :NERDTreeToggle<CR>
@@ -160,12 +159,6 @@ let g:NERDCompactSexyComs=1   " 多行注释时样子更好看
 
 " jedi and YCM config
 autocmd FileType python,javascript setlocal completeopt=longest
-set pumheight=10
-" let g:jedi#use_tabs_not_buffers = 0
-" let g:jedi#popup_on_dot = 1
-" let g:jedi#popup_select_first = 1
-" let g:jedi#documentation_command = "K"
-" let g:jedi#rename_command = "<leader>r"
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <Tab> <C-x><C-o>
 let g:ycm_confirm_extra_conf=0
@@ -212,21 +205,14 @@ let g:airline#extensions#virtualenv#enabled = 1
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
 endif
-" let g:airline_theme             = 'wombat'
 let g:airline_theme             = 'molokai'
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_check_on_w = 1
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_python_checkers = ['pyflakes']
 
-
-"html css
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,jst EmmetInstall
-let g:user_emmet_leader_key='<C-l>'
-let g:user_emmet_mode='a'
-
-" let g:tern#is_show_argument_hints_enabled=1
+" tern.js setting
+let g:tern#is_show_argument_hints_enabled=1
 let g:tern_show_argument_hints='on_hold'
 let g:tern_map_keys=1
 
@@ -276,6 +262,7 @@ let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = 'MR'
 
 "html
+let g:user_emmet_install_global = 0
 autocmd FileType html,css,jst EmmetInstall
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_always_populate_loc_list = 1
@@ -303,7 +290,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-
 " vim pencil
 let g:pencil#wrapModeDefault = 'soft'
 let g:pencil#autoformat = 1
@@ -316,36 +302,31 @@ augroup pencil
 augroup END
 
 if has("gui_running")
-    set guifont=Meslo_LG_S:h14
-    " set guifont=Menlo:h16
-    set guifont=Menlo:h16
+    colorscheme solarized
+    highlight ColorColumn ctermbg=220 guibg=tan
+    set guifont=Menlo:h14
     set guioptions-=T
     set t_Co=256
     set lines=50 columns=180
     set guioptions-=r
     set guioptions-=L
-    set bg=dark
-    " colorscheme solarized
     hi Pmenu guibg=pink guifg=white
     hi Cursor guifg=white guibg=pink
     set pumheight=15
-    " hi PmenuSel guibg=white guifg=pink
 endif
+
 "ultisnips setting
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "for search
 let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:tern_request_timeout = 6000
+let g:tern_request_timeout = 100
 
 
 "set scheme
 let g:solarized_termcolors=256
-
 set enc=utf-8
 set fileencoding=utf-8
-
-" commandT ignore
-
+set wildignore+=/bower_components/*,/node_modules/*
 let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*". ",**/node_modules/*"
