@@ -34,9 +34,7 @@ set t_Co=256
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
-" set lazyredraw
-colorscheme solarized
-" set bg=dark
+set lazyredraw
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -55,7 +53,7 @@ set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-set listchars=tab:▸·,trail:·,precedes:<,extends:>
+set listchars=tab:▸·,trail:·,precedes:<,extends:>,eol:≈
 set list
 set noendofline     " why?
 
@@ -111,7 +109,11 @@ endif
 " 'easymotion/vim-easymotion'
 " 'The-NERD-Commenter'
 " 'marijnh/tern_for_vim'
+" Plug 'lambdatoast/elm.vim'
+" Plug 'reedes/vim-pencil'
 call plug#begin('~/.vim/plugged')
+Plug 'sheerun/vim-polyglot'
+Plug 'fholgado/minibufexpl.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
@@ -125,25 +127,22 @@ Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'moll/vim-node'
 Plug 'yegappan/grep'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'chrisgillis/vim-bootstrap3-snippets'
-Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'lambdatoast/elm.vim'
+Plug 'fatih/vim-go'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
-Plug 'reedes/vim-pencil'
 Plug 'easymotion/vim-easymotion'
 Plug 'suan/vim-instant-markdown'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
 Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/vimshell.vim'
+Plug 'sjl/gundo.vim'
 call plug#end()            " required
 
 
@@ -151,7 +150,8 @@ call plug#end()            " required
 nmap <F3> :NERDTreeToggle<CR>
 let g:NERDTreeChDirMode=2
 let g:NERDTreeDirArrows = 1
-" let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeQuitOnOpen = 1
+
 
 " commenter
 let g:NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
@@ -220,18 +220,18 @@ let g:tern_map_keys=1
 let g:javascript_enable_domhtmlcss = 1
 
 " markdown setting
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_frontmatter=1
+" let g:vim_markdown_folding_disabled=1
+" let g:vim_markdown_frontmatter=1
 
 " MiniBufExpl Colors
 let g:miniBufExplorerAutoStart = 1
 let g:miniBufExplBuffersNeeded = 1
+let g:miniBufExplStatusLineText = "-已打开文件-"
 " let g:miniBufExplHideWhenDiff = 1
 " let g:miniBufExplMinSize = 25
 " let g:miniBufExplMaxSize = 30
 " let g:miniBufExplVSplit = 1
 " let g:miniBufExplBRSplit = 1
-" let g:miniBufExplStatusLineText = "-已打开文件-"
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-e>"
@@ -290,19 +290,9 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-" vim pencil
-let g:pencil#wrapModeDefault = 'soft'
-let g:pencil#autoformat = 1
-let g:pencil#textwidth = 80
-
-augroup pencil
-    autocmd!
-    autocmd FileType markdown,mkd call pencil#init()
-    autocmd FileType text         call pencil#init({'wrap': 'hard'})
-augroup END
-
 if has("gui_running")
     colorscheme solarized
+    set bg=dark
     highlight ColorColumn ctermbg=220 guibg=tan
     set guifont=Menlo:h14
     set guioptions-=T
@@ -313,6 +303,9 @@ if has("gui_running")
     hi Pmenu guibg=pink guifg=white
     hi Cursor guifg=white guibg=pink
     set pumheight=15
+else 
+    colorscheme slate
+    set bg=light
 endif
 
 "ultisnips setting
@@ -326,7 +319,10 @@ let g:tern_request_timeout = 100
 
 "set scheme
 let g:solarized_termcolors=256
-set enc=utf-8
-set fileencoding=utf-8
+" set enc=utf-8
+" setglobal fileencoding=utf-8
 set wildignore+=/bower_components/*,/node_modules/*
 let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*". ",**/node_modules/*"
+
+" set no delay 
+set timeoutlen=1000 ttimeoutlen=0
