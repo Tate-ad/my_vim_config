@@ -7,7 +7,6 @@
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
 autocmd! BufWritePost ~/.vimrc source %
 
 " Uncomment the next line to make Vim more Vi-compatible
@@ -15,8 +14,8 @@ autocmd! BufWritePost ~/.vimrc source %
 " options, so any other options should be set AFTER setting 'compatible'.
 set nocompatible
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
+let mapleader=","
+
 if has("syntax")
   syntax on
 endif
@@ -34,11 +33,13 @@ set t_Co=256
 set novisualbell
 set viminfo+=/100  "set the limit viminfo
 set ttyfast
+set ttyscroll=3
 set lazyredraw
+set pumheight=10
+set gcr=a:block-blinkon0 "" 禁止光标闪烁
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-let mapleader=","
 set number          " show line number
 set showcmd         " Show (partial) command in status line.
 set showmatch       " Show matching brackets.
@@ -53,17 +54,25 @@ set bs=2            " make backspace behave like normal again
 
 highlight Pmenu guibg=brown gui=bold
 
-set listchars=tab:▸·,trail:·,precedes:<,extends:>,eol:≈
+set listchars=tab:▸·,trail:·,precedes:<,extends:>
 set list
 set noendofline     " why?
 
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
-imap <C-e> <END>
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>h <C-w>h
 nnoremap <leader>l <C-w>l
+nnoremap <C-p> :CommandT<CR>
+
+" emacs key
+inoremap <leader>e <END>
+inoremap <leader>a <HOME>
+inoremap <C-n> <C-\><C-O>j
+inoremap <C-p> <C-\><C-O>k
+inoremap <C-B> <C-\><C-O>h
+inoremap <C-F> <C-\><C-O>l
 
 " autocmd! FileType javascript nnoremap <C-b> :!node %<CR>
 
@@ -78,12 +87,19 @@ vnoremap > >gv  " better indentation
 
 set fo+=tw   "auto wrap require formatoptions+=t"
 set wrap linebreak
+set showbreak=↩\ 
 set textwidth=79  " width of document (used by gd)
 set colorcolumn=80
 highlight ColorColumn ctermbg=220 guifg=yellow
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
-highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
+" highlight Pmenu term=reverse ctermbg=cyan ctermfg=black
+" highlight PmenuSel term=reverse ctermbg=lightred ctermfg=black
+" YCM 补全菜单配色
+" 菜单
+highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
+" 选中项
+highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
+
 
 highlight ExtraWhitespace ctermbg=darkgreen ctermfg=white
 match ExtraWhitespace /\s\+$/
@@ -106,24 +122,31 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " backup plugin 
-" 'easymotion/vim-easymotion'
-" 'The-NERD-Commenter'
-" 'marijnh/tern_for_vim'
+" Plug 'easymotion/vim-easymotion'
+" Plug 'The-NERD-Commenter'
+" Plug 'marijnh/tern_for_vim'
 " Plug 'lambdatoast/elm.vim'
 " Plug 'reedes/vim-pencil'
+" Plug 'scrooloose/syntastic'
+" Plug 'fatih/vim-go'
+" Plug 'majutsushi/tagbar'
+" Plug 'easymotion/vim-easymotion'
+" Plug 'Shougo/vimproc.vim'
+" Plug 'Shougo/vimshell.vim'
+" Plug 'sjl/gundo.vim'
+" Plug 'fholgado/minibufexpl.vim'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'kien/ctrlp.vim'
+
 call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'gregsexton/gitv'
 Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'Auto-Pairs'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree'      "文件浏览
-Plug 'bling/vim-airline'
-Plug 'kien/ctrlp.vim'
 Plug 'mattn/emmet-vim'
-Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
@@ -133,24 +156,21 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'chrisgillis/vim-bootstrap3-snippets'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'fatih/vim-go'
 Plug 'Yggdroot/indentLine'
-Plug 'majutsushi/tagbar'
-Plug 'easymotion/vim-easymotion'
 Plug 'suan/vim-instant-markdown'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
-Plug 'Shougo/vimproc.vim'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'wincent/command-t'
 Plug 'Shougo/vimshell.vim'
-Plug 'sjl/gundo.vim'
+Plug 'Shougo/vimproc.vim'
 call plug#end()            " required
 
 
 " tagbar
 nmap <F3> :NERDTreeToggle<CR>
-let g:NERDTreeChDirMode=2
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeQuitOnOpen = 1
+" let g:NERDTreeChDirMode=2
+" let g:NERDTreeDirArrows = 1
+" let g:NERDTreeQuitOnOpen = 1
 
 
 " commenter
@@ -158,20 +178,20 @@ let g:NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
 let g:NERDCompactSexyComs=1   " 多行注释时样子更好看
 
 " jedi and YCM config
-autocmd FileType python,javascript setlocal completeopt=longest
+autocmd FileType python,javascript setlocal completeopt=longest,menuone
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 inoremap <Tab> <C-x><C-o>
 let g:ycm_confirm_extra_conf=0
 set completeopt-=preview " show the preview window
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
+" let g:ycm_complete_in_comments = 1
+" let g:ycm_complete_in_strings = 1
 "注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_cache_omnifunc=1
-let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_collect_identifiers_from_tags_files=1
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_cache_omnifunc=0
+let g:ycm_min_num_of_chars_for_completion=1
+" let g:ycm_collect_identifiers_from_tags_files=1
 
 " powerline
 set laststatus=2
@@ -180,9 +200,6 @@ set laststatus=2
 " airline
 """"""""""""""""""""""""""""""
 let g:airline_enable = 1
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '▶'
-let g:airline_right_sep = '◀'
 let g:airline_detect_paste=1
 let g:airline_mode_map = {
   \ '__' : '-',
@@ -199,29 +216,39 @@ let g:airline_mode_map = {
   \ }
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '▶'
 let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#left_sep = '▶'
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
+let g:airline_left_sep='▶'
+let g:airline_left_alt_sep='▶'
+let g:airline_right_sep='◀'
+let g:airline_right_alt_sep='◀'
+
 if !exists('g:airline_symbols')
       let g:airline_symbols = {}
 endif
-let g:airline_theme             = 'molokai'
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_check_on_w = 1
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_python_checkers = ['pyflakes']
+let g:airline_symbols.space = "\ua0"
+
+let g:airline_theme             = 'wombat'
+
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_check_on_w = 1
+" let g:syntastic_javascript_checkers = ['jshint']
+" let g:syntastic_python_checkers = ['pyflakes']
 
 " tern.js setting
-let g:tern#is_show_argument_hints_enabled=1
-let g:tern_show_argument_hints='on_hold'
-let g:tern_map_keys=1
+" let g:tern#is_show_argument_hints_enabled=1
+" let g:tern_show_argument_hints='on_hold'
+" let g:tern_map_keys=1
 
 "javascript
 let g:javascript_enable_domhtmlcss = 1
 
 " markdown setting
-" let g:vim_markdown_folding_disabled=1
-" let g:vim_markdown_frontmatter=1
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter=1
 
 " MiniBufExpl Colors
 let g:miniBufExplorerAutoStart = 1
@@ -263,7 +290,7 @@ let g:gitgutter_sign_modified_removed = 'MR'
 
 "html
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,jst EmmetInstall
+autocmd FileType html,css,jst,jsx,js,javascript EmmetInstall
 let g:syntastic_html_tidy_exec = 'tidy'
 let g:syntastic_always_populate_loc_list = 1
 let g:use_emmet_complete_tag = 1
@@ -300,13 +327,19 @@ if has("gui_running")
     set lines=50 columns=180
     set guioptions-=r
     set guioptions-=L
-    hi Pmenu guibg=pink guifg=white
-    hi Cursor guifg=white guibg=pink
-    set pumheight=15
+    " YCM 补全菜单配色
+    " 菜单
+    highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
+    " 选中项
+    highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
+    " hi Pmenu guibg=pink guifg=white
+    " hi Cursor guifg=white guibg=pink
+    set pumheight=10
 else 
     colorscheme slate
     set bg=light
 endif
+
 
 "ultisnips setting
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -319,10 +352,27 @@ let g:tern_request_timeout = 100
 
 "set scheme
 let g:solarized_termcolors=256
-" set enc=utf-8
-" setglobal fileencoding=utf-8
+set enc=utf-8
+setglobal fileencoding=utf-8
 set wildignore+=/bower_components/*,/node_modules/*
 let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*". ",**/node_modules/*"
 
 " set no delay 
-set timeoutlen=1000 ttimeoutlen=0
+set timeoutlen=300 ttimeoutlen=0
+
+"setting for jsdoc
+let g:solarized_termtrans=0
+let g:solarized_degrade=0
+let g:solarized_bold=1
+let g:solarized_underline=1
+let g:solarized_italic=1
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
+let g:solarized_diffmode="normal"
+let g:solarized_hitrail=0
+let g:solarized_menu=1
+
+"jsdoc setting
+let g:jsdoc_additional_descriptions = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_allow_input_prompt = 1
