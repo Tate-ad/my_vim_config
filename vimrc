@@ -136,7 +136,6 @@ endif
 " Plug 'sjl/gundo.vim'
 " Plug 'fholgado/minibufexpl.vim'
 " Plug 'sheerun/vim-polyglot'
-" Plug 'kien/ctrlp.vim'
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
@@ -147,6 +146,7 @@ Plug 'Auto-Pairs'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree'      "文件浏览
 Plug 'mattn/emmet-vim'
+Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
@@ -160,9 +160,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'suan/vim-instant-markdown'
 Plug 'mileszs/ack.vim'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'wincent/command-t'
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim'
+Plug 'briancollins/vim-jst'
 call plug#end()            " required
 
 
@@ -318,7 +318,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 if has("gui_running")
-    colorscheme solarized
+    " colorscheme solarized
+    colorscheme monokai-soda
     set bg=dark
     highlight ColorColumn ctermbg=220 guibg=tan
     set guifont=Menlo:h14
@@ -327,13 +328,8 @@ if has("gui_running")
     set lines=50 columns=180
     set guioptions-=r
     set guioptions-=L
-    " YCM 补全菜单配色
-    " 菜单
     highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
-    " 选中项
     highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
-    " hi Pmenu guibg=pink guifg=white
-    " hi Cursor guifg=white guibg=pink
     set pumheight=10
 else 
     colorscheme slate
@@ -355,22 +351,9 @@ let g:solarized_termcolors=256
 set enc=utf-8
 setglobal fileencoding=utf-8
 set wildignore+=/bower_components/*,/node_modules/*
-let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*". ",**/node_modules/*"
 
 " set no delay 
-set timeoutlen=300 ttimeoutlen=0
-
-"setting for jsdoc
-let g:solarized_termtrans=0
-let g:solarized_degrade=0
-let g:solarized_bold=1
-let g:solarized_underline=1
-let g:solarized_italic=1
-let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
-let g:solarized_diffmode="normal"
-let g:solarized_hitrail=0
-let g:solarized_menu=1
+set timeoutlen=200 ttimeoutlen=0
 
 "jsdoc setting
 let g:jsdoc_additional_descriptions = 1
