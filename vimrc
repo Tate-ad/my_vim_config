@@ -353,9 +353,11 @@ setglobal fileencoding=utf-8
 set wildignore+=/bower_components/*,/node_modules/*
 
 " set no delay 
-set timeoutlen=200 ttimeoutlen=0
+set timeoutlen=300 ttimeoutlen=0
 
 "jsdoc setting
 let g:jsdoc_additional_descriptions = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_allow_input_prompt = 1
+
+highlight Cursor guifg=white guibg=green
