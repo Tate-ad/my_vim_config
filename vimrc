@@ -318,11 +318,11 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 if has("gui_running")
-    " colorscheme solarized
-    colorscheme monokai-soda
+    colorscheme solarized
+    " colorscheme monokai-soda
     set bg=dark
     highlight ColorColumn ctermbg=220 guibg=tan
-    set guifont=Menlo:h14
+    set guifont=Menlo\ Bold
     set guioptions-=T
     set t_Co=256
     set lines=50 columns=180
@@ -331,7 +331,7 @@ if has("gui_running")
     highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
     highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
     set pumheight=10
-else 
+else
     colorscheme slate
     set bg=light
 endif

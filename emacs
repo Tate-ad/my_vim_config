@@ -18,7 +18,7 @@
 
 ;;; theme setting and font
 (load-theme 'monokai t)
-(add-to-list 'default-frame-alist '(font . "Menlo-14"))
+(add-to-list 'default-frame-alist '(font . "Menlo-12"))
 (require 'powerline)
 (powerline-center-theme)
 
