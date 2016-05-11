@@ -128,7 +128,6 @@ endif
 " Plug 'marijnh/tern_for_vim'
 " Plug 'lambdatoast/elm.vim'
 " Plug 'reedes/vim-pencil'
-" Plug 'scrooloose/syntastic'
 " Plug 'fatih/vim-go'
 " Plug 'majutsushi/tagbar'
 " Plug 'easymotion/vim-easymotion'
@@ -164,6 +163,9 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim'
 Plug 'briancollins/vim-jst'
+Plug 'scrooloose/syntastic'
+Plug 'elzr/vim-json'
+Plug 'nvie/vim-flake8'
 call plug#end()            " required
 
 
@@ -234,10 +236,10 @@ let g:airline_symbols.space = "\ua0"
 
 let g:airline_theme             = 'wombat'
 
-" let g:syntastic_always_populate_loc_list = 0
-" let g:syntastic_check_on_w = 1
-" let g:syntastic_javascript_checkers = ['jshint']
-" let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_check_on_w = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_python_checkers = ['flake8']
 
 " tern.js setting
 " let g:tern#is_show_argument_hints_enabled=1
@@ -362,3 +364,5 @@ let g:jsdoc_input_description = 1
 let g:jsdoc_allow_input_prompt = 1
 
 highlight Cursor guifg=white guibg=green
+
+let g:vim_json_syntax_conceal = 0
