@@ -1,5 +1,5 @@
 Host vultr
-    HostName 45.32.248.144
+    HostName 45.32.37.30
     user     root
     port     22
 
